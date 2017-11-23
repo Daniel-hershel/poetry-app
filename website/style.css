@@ -1,0 +1,11 @@
+body{
+	background-color: rgba(68, 68, 68, .4)
+
+}
+
+#app {
+	background-color: rgba(252, 252, 252, .9);
+	display: grid;
+	width: 90vw;
+	grid-template-columns: 30vw 30vw 30vw;
+}
