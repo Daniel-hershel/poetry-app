@@ -38,9 +38,13 @@
 <div id = "writerComponent" class = "section">
 	 <button @click="addPoem(title)" id = "add" type="submit" class="btn"> Add Poem </button>
 
-<input v-model="title" placeholder="poem title">
+<input id = "titleInput" v-model="title" placeholder="poem title">
 <div id = "editor">
 </div>
+
+<div id = "revisions">
+
+	</div>
   
 </div>
 <div id = "stage" class = "section">
@@ -58,7 +62,7 @@
 <button class = "delete" @click="removePoem(poem)">Delete</button>
 
 <!-- //need to fix revise so it's not so easy to accidentally overwrite the wrong entry--preferable bhy only showing revise button for `poem` that is currently being displayed in stage/editor -->
- <!-- <button @click="revisePoem(poem)" id = "revise" type="submit" class="btn"> Revise </button> -->
+<!--  <button @click="revisePoem(poem)" id = "revise" type="submit" class="btn"> Revise </button> -->
 
 
 

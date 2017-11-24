@@ -37,3 +37,13 @@ grid-row: 1/span 3
 h1{
 	font-size: 150%;
 }
+
+#revisionMaker{
+	width: 10vw;
+}
+
+.poemTitle{
+	font-size: 150%;
+	line-height: 1.2em;
+	text-transform: uppercase;
+}

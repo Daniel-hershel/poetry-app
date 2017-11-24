@@ -9,7 +9,7 @@ function editorCreator(poem) {
   // console.log(quill.root.innerHTML)
   // let toDom = quill.root.innerHTML;
   let toDom = poem;
-	console.log(poem)
+	// console.log(poem)
 
   // console.log(toDom)
   // console.log(poem)
@@ -23,7 +23,7 @@ function editorCreator(poem) {
 
 function showPoem(poem) {
 
-	console.log(poem.title)
+	// console.log(poem.title)
 
 	// create an h1 element for the title
 	let theTitle =$('<h1>' + poem.title+ '</h1>' );
