@@ -41,40 +41,73 @@ var app = new Vue({
       var everythingSelector = $("#stage");
       // reset the stage
       // everythingSelector.empty();
-      // console.log(poem.stanzas)
+      //set the editor contents to be the text of the current poem
+        // how to get the contents of the current poem
+        console.log(poem)
+        // how to set the contents of quill editor
+          //I might want to create another entry in each for database with just the plain text from the quill editor? Rather then strip the html
+  
 
       showPoem(poem)
+      quill.setText(poem.text+ '\n')
+      quill.formatText("false")
+//and then create a div that holds the revise button and it clears thatDiv.empty() & create this button for the poem shown 
+//so instead for poems in poem -- how with vue do i just access the current poem
+ // <button @click="revisePoem(poem)" id = "revise" type="submit" class="btn"> Revise Poem </button>
 
-      //call the function to create a dom instance of the selected poem
-      // creator(poem);
 
-      //to create poem on dom of most recent input
-      // var daPoem = app.poems[app.poems.length - 1];
+//       quill.setContents([
+//   { insert: poem.stanzas },
+//   { insert: 'World!', attributes: { bold: true } },
+//   { insert: '\n' }
+// ]);
 
-      // console.log(poem)
+
     },
 
     addPoem: function(title) {
       // consol.log()
       let delta = quill.root.innerHTML;
-      console.log(delta);
+      let plainText = quill.getContents().ops[0].insert
+      // console.log(delta);
       // console.log(quill.root.innerHTML)
       let newThing = {
         title: title,
-        stanzas: delta
+        stanzas: delta,
+        text: plainText
       };
 
-      console.log(newThing)
+  // let message = quill.getContents();
+
+
+      // console.log(newThing)
+      console.log(quill.getContents().ops[0].insert)
+
 
 
 
       databaseUrl.push(newThing);
-
-      // databaseUrl.push(this.newPoem);
-
-      // this.newPoem.title = "";
-      // this.newPoem.stanza = "";
     },
+     removePoem: function(poem) {
+      databaseUrl.child(poem[".key"]).remove();
+    },
+
+    revisePoem:function(poem){
+      //if 
+      // console.log(poem)
+      // //update the entry of the button that `show` was pressed on
+      // console.log(poem)
+      // console.log(this)
+        let newStanzas = quill.root.innerHTML;
+      let newText = quill.getContents().ops[0].insert
+      databaseUrl.child(poem['.key']).child('text').set(newText);
+      databaseUrl.child(poem['.key']).child('stanzas').set(newStanzas);
+      //set poem.stanzas to quill.html
+      // how to overwrite the contents of a db entry with vuefire
+      //set poem.text to quill.text
+
+
+    }
   },
       created: function() {
     console.log(this.poems)
@@ -97,9 +130,11 @@ var app = new Vue({
 
 
 quill.on("text-change", function(delta, oldDelta, source) {
-  let message = quill.getContents();
+  // let message = quill.getContents();
+      let message = quill.root.innerHTML;
+
   // console.log(message)
-  let poem = message.ops[0].insert;
+  // let poem = message.ops[0].insert;
 
   editorCreator(message);
 });

@@ -7,7 +7,10 @@ function creator(poem) {
 
 function editorCreator(poem) {
   // console.log(quill.root.innerHTML)
-  let toDom = quill.root.innerHTML;
+  // let toDom = quill.root.innerHTML;
+  let toDom = poem;
+	console.log(poem)
+
   // console.log(toDom)
   // console.log(poem)
   // live view of what's being typed in editor

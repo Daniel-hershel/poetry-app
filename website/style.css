@@ -1,5 +1,6 @@
 body{
-	background-color: rgba(68, 68, 68, .4)
+	background-color: rgba(68, 68, 68, .4);
+	font-size: 16px;
 
 }
 
@@ -7,5 +8,32 @@ body{
 	background-color: rgba(252, 252, 252, .9);
 	display: grid;
 	width: 90vw;
-	grid-template-columns: 30vw 30vw 30vw;
+	grid-template-columns: 30vw 30vw 35vw;
+	grid-template-rows: 30vh 20vh 30vh;
+	grid-gap: 1.5em;
+}
+
+.section{
+	border: .5em solid #444;
+}
+#writerComponent{
+
+	grid-row: 1/2
+
+}
+
+#stage {
+	grid-row: 1/2
+
+}
+
+#archive{
+grid-row: 1/span 3
+
+
+
+}
+
+h1{
+	font-size: 150%;
 }
