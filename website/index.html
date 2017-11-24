@@ -5,11 +5,11 @@
 <title>Proetry</title>
 
 
-  <script src=" https://cdn.jsdelivr.net/npm/vue"></script>
-  <!-- Firebase -->
-  <script src="https://gstatic.com/firebasejs/4.0.0/firebase.js"></script>
-  <!-- VueFire -->
-  <script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
+<script src=" https://cdn.jsdelivr.net/npm/vue"></script>
+<!-- Firebase -->
+<script src="https://gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+<!-- VueFire -->
+<script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
 
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -34,47 +34,36 @@
 <body>
 
 <div id = "app">
-<!-- <h1> poetry </h1> -->
-<div id = "writerComponent" class = "section">
-	 <button @click="addPoem(title)" id = "add" type="submit" class="btn"> Add Poem </button>
 
-<input id = "titleInput" v-model="title" placeholder="poem title">
-<div id = "editor">
+  <div id = "writerComponent" class = "section">
+  	
+    <div id = "titleHolder">
+    <input id = "titleInput" v-model="title" placeholder="poem title">
 </div>
+    <div id = "editor"></div>
+    <div id = "addButton">
 
-<div id = "revisions">
+      <button @click="addPoem(title)" id = "add" type="submit" class="option"> Add Poem </button>  
+    </div>
+    <div id = "revisions"></div>
+  </div>
 
-	</div>
+  <div id = "stage" class = "section"></div>
   
-</div>
-<div id = "stage" class = "section">
-
-	</div>
-
-	<div id = "archive" class = "section">
-<ul>
-<!--  <li v-for="poem in poems" v-bind:titleStuff="poem.title"  is="my-component"> -->
-
- <li v-for="poem in poems">
-{{poem.title}}
-<button class = "show" @click="showPoem(poem)">Show</button>
-
-<button class = "delete" @click="removePoem(poem)">Delete</button>
-
-<!-- //need to fix revise so it's not so easy to accidentally overwrite the wrong entry--preferable bhy only showing revise button for `poem` that is currently being displayed in stage/editor -->
-<!--  <button @click="revisePoem(poem)" id = "revise" type="submit" class="btn"> Revise </button> -->
-
-
-
-<!--   inline way to link buttons to database -->
-<!--  <button @click="removePoem(item['.key'])">X</button> -->
-</li>
-</ul>
-</div>
-
-
+  <div id = "archive" class = "section">
+    <ul>
+      <li v-for="poem in poems">
+      {{poem.title}}
+      <button class = "show" @click="showPoem(poem)">Show</button>
+      <button class = "delete" @click="removePoem(poem)">Delete</button>
+      <!--   inline way to link buttons to database -->
+      <!--  <button @click="removePoem(item['.key'])">X</button> -->
+      </li>
+    </ul>
+  </div>
 
 </div> <!-- end app  -->
+
 <script src="app.js"></script>
 <script src="creator.js"></script>
 </body>

@@ -21,15 +21,16 @@ function editorCreator(poem) {
 
 
 
-function showPoem(poem) {
+function showThePoem(poem) {
 
 	// console.log(poem.title)
 
 	// create an h1 element for the title
-	let theTitle =$('<h1>' + poem.title+ '</h1>' );
 	// append stanzas to the stage
 	 var everythingSelector = $("#stage");
 	 everythingSelector.empty()
+  let theTitle =$('<h1>' + poem.title+ '</h1>' );
+   
   everythingSelector.append(theTitle);
   everythingSelector.append(poem.stanzas);
 
