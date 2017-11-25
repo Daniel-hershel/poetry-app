@@ -16,7 +16,13 @@ let db = firebaseApp.database();
 
 let databaseUrl = db.ref("poems");
 
+
+
+
+     
 /* Initialize Vue app */
+
+let flag = true
 
 var app = new Vue({
   el: "#app",
@@ -152,10 +158,49 @@ var app = new Vue({
       databaseUrl.child(poem[".key"]).remove();
     },
 
-  },
+    showButtons: function(event){
+      //how to make it so that only the button that was pressed's element shows the buttons
+      let buttonGrabber = $(event.srcElement).siblings().filter('button')
+        // console.log($(this))
+
+      if (flag){
+        // console.log(flag)
+        // console.log(this)
+        buttonGrabber.show()
+        flag = !flag
+      }
+      else {
+        buttonGrabber.hide()
+        flag = !flag
+        // console.log('not flag')
+      }
+    },
+
+    mouseEnter: function(){
+      let thing = $(event.srcElement)
+      console.log(thing)
+
+      
+      console.log('in')
+    },
+
+    mouseLeave: function(){
+      console.log('out')
+    }
+
+  }, // End methods
 
   created: function() {
     console.log(this.poems)
+    console.log($('.archiveTitle').toArray())
+
+          $('.show').hide()
+      $('.delete').hide()
+
+
+
+
+
 
   }
 
@@ -168,18 +213,21 @@ var app = new Vue({
 // does this need to be in the vue app?
 var quill = new Quill('#editor', {
 theme: 'bubble',
-placeholder: 'go...',
+placeholder: 'poem...',
 // debug: 'info'
 });
 
 
 quill.on("editor-change", function(delta, oldDelta, source) {
+  var poemBodySelector = $("#stage");
+
+  poemBodySelector.empty();
+
 // let message = quill.getContents();
   let titleSelector = $('#poemTitle') 
   let poem = quill.root.innerHTML;
-  var poemBodySelector = $("#poemBody");
+  console.log(poem)
   // 
-  poemBodySelector.empty();
   // titleSelector.empty();
 
   poemBodySelector.append(poem);
@@ -187,6 +235,18 @@ quill.on("editor-change", function(delta, oldDelta, source) {
 // editorCreator(message);
 });
 
+
+
+// $(document).ready(function() {
+
+// });
+// hide show and delete and show on title press--then add velocity animations
+
+
+// 
+// $( document ).ready(function() {
+
+// })
 
 
 /* quill function to get selected/highlighted text */

@@ -2,20 +2,25 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Proetry</title>
+<title>Poetry</title>
 
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script src=" https://cdn.jsdelivr.net/npm/vue"></script>
+<link rel="stylesheet" href="https://unpkg.com/vue-directive-tooltip@latest/css/index.min.css">
+<!-- <script src="https://unpkg.com/vue@latest/dist/vue.js"></script> -->
+<script src="https://unpkg.com/popper.js"></script>
+<script src="https://unpkg.com/v-tooltip"></script>
 <!-- Firebase -->
 <script src="https://gstatic.com/firebasejs/4.0.0/firebase.js"></script>
 <!-- VueFire -->
 <script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
 
-<script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <!-- Main Quill library -->
 <script src="//cdn.quilljs.com/1.3.3/quill.js"></script>
 <script src="//cdn.quilljs.com/1.3.3/quill.js"></script>
+
 
 <!-- Theme included stylesheets -->
 <link href="//cdn.quilljs.com/1.3.3/quill.bubble.css" rel="stylesheet">
@@ -26,6 +31,7 @@
 
 <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
 <link rel = "stylesheet" href= "reset.css">
+<link rel = "stylesheet" href= "tooltipStyle.css">
 <link rel = "stylesheet" href= "style.css">
 
 
@@ -39,7 +45,7 @@
   	
     <div id = "titleHolder">
     <input id = "titleInput" v-model="title" placeholder="poem title">
-</div>
+    </div>
     <div id = "editor"></div>
     <div id = "addButton">
 
@@ -49,17 +55,33 @@
   </div>
 
   <div id = "stage" class = "section"></div>
-  
+
   <div id = "archive" class = "section">
-    <ul>
-      <li v-for="poem in poems">
-      {{poem.title}}
+
+  	<h1 id = "testTip" v-tooltip="{
+  content: 'click on any of the TITLES to reveal the opetions',
+  placement: 'left-start',
+  classes: ['info'],
+  targetClasses: ['it-has-a-tooltip'],
+  offset: 10,
+  delay: {
+    show: 50,
+    hide: 300,
+  },
+}" > Poem Archive </h1>
+    <!-- <ul> -->
+      <div  class = "poemHolder" v-for="poem in poems">
+      <div class = "archiveTitle"  @click="showButtons(event)" v-tooltip.left-start="poem.stanzas">
+      	{{poem.title}}
+      </div>
+
+      <!-- <div  class = "flag"></div> -->
       <button class = "show" @click="showPoem(poem)">Show</button>
       <button class = "delete" @click="removePoem(poem)">Delete</button>
       <!--   inline way to link buttons to database -->
       <!--  <button @click="removePoem(item['.key'])">X</button> -->
-      </li>
-    </ul>
+      </div>
+    <!-- </ul> -->
   </div>
 
 </div> <!-- end app  -->
