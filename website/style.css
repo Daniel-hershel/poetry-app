@@ -13,22 +13,16 @@
 */
 body{
 	background-color: rgba(188, 192, 201, .7);
-	// background-color: #550000;
-	// background-color: rgba(68, 68, 68, 1);
 	font-size: 18px;
 	font-family: oswald;
-	// color: #BCC0C9;
 	color:  #102451;
-	// color: #96A4C4;
-
 }
 
 #app {
-	// background-color: rgba(252, 252, 252, .9);
 	background-color: rgba(150, 164, 196, .8);
 	display: grid;
 	width: 95vw;
-	grid-template-columns: 65vw 30vw;
+	grid-template-columns: 60vw 35vw;
 	grid-template-rows: 40vh 50vh;
 	grid-gap: 1.5em;
 	margin: 4vh;
@@ -68,9 +62,6 @@ body{
 	grid-row: 3/ span 1;
 	grid-column: 1/1;
 
-	// display: flex;
-	// content-align: center;
-
 }
 
 #titleHolder{
@@ -90,6 +81,7 @@ body{
 	grid-row: 1/span 1;
 	grid-column: 1/span 1;
 	background-color: #68738A;
+	width: 90%;
 
 
 }
@@ -110,12 +102,13 @@ grid-column: 2/span 1;
 }
 
 .poemHolder{
-	// background-color: rgba(14, 153, 218, .8);
 	background-color: #102451;
 	margin: .5em;
 	position: relative;
 	z-index: 1;
 	height: 10vh;
+	width: 70%;
+	margin-left: 30%;
 
 }
 
@@ -143,9 +136,10 @@ grid-column: 2/span 1;
 	grid-column: 1/ span 2;
 }
 
-h1{
+#archiveSectionTitle{
 	font-size: 150%;
-	text-align: center;
+	margin-left: 30%;
+	// text-align: center;
 }
 
 #revisionMaker{

@@ -77,7 +77,7 @@ var app = new Vue({
       poemTitle.append(poem.title)
 
       let poemBody = $('<div id = "poemBody"></div>')
-      poemBody.append(poem.stanzas)
+      poemBody.append(poem.text)
 
       // Append title and body to stage
 
