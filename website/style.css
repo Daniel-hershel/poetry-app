@@ -22,7 +22,7 @@ body{
 	background-color: rgba(150, 164, 196, .8);
 	display: grid;
 	width: 95vw;
-	grid-template-columns: 60vw 35vw;
+	grid-template-columns: 55vw 30vw;
 	grid-template-rows: 40vh 50vh;
 	grid-gap: 1.5em;
 	margin: 4vh;
@@ -86,12 +86,6 @@ body{
 
 }
 
-#previewStage{
-  grid-row: 1/1;
-  grid-column: 2/span 1;
-  height: 100%;
-  background-color: #4C5874;
-}
 
 #archive{
 grid-row: 1/span 2;
@@ -107,18 +101,23 @@ grid-column: 2/span 1;
 	position: relative;
 	z-index: 1;
 	height: 10vh;
-	width: 70%;
+	width: 90%;
 	margin-left: 30%;
+	border: 0em solid  #4C5874;
+	box-shadow: 0em 0em 0em #BCC0C9;
 
 }
 
 .flag{
 	background-color: #B4303D;
-	border-radius: 50%;
-	width: 4.5vh;
-	height: 4.5vh;
-	left: 50%;
-	position: absolute;
+	// border-radius: 50%;
+	width: 5vh;
+	height: 5vh;
+	// left: 50%;
+	float: right;
+	margin: .5em;
+
+	// position: absolute;
 }
 
 .archiveTitle{
@@ -174,14 +173,19 @@ input::placeholder {
 }
 
 .show{
-	background-color: #BCC0C9;
+	background-color: rgba(58,111,105, 1);
+	color: white;
+
+	margin: 1.5em;
+	height: 5vh;
 
 }
 
 .delete{
-	background-color: #B4303D;
+	background-color: rgba(122,41,24, 1);
 	color: white;
-
+	margin: 1.5em;
+	height: 5vh;
 }
 
 .tooltipContent{

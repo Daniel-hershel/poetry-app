@@ -70,13 +70,13 @@
   },
 }" > Poem Archive </h1>
     <!-- <ul> -->
-      <div  class = "poemHolder" v-for="poem in poems">
-      <div class = "archiveTitle"  @click="showButtons(event)" v-tooltip.left-start="poem.stanzas">
+      <div class = "poemHolder" v-for="poem in poems">
+      <div class = "archiveTitle"  v-tooltip.left-start="poem.stanzas">
       	{{poem.title}}
       </div>
 
-      <!-- <div  class = "flag"></div> -->
-      <button class = "show" @click="showPoem(poem)">Show</button>
+      <div @click="showButtons(event)" class = "flag"></div>
+      <button class = "show" @click="showPoem(poem)">Stage</button>
       <button class = "delete" @click="removePoem(poem)">Delete</button>
       <!--   inline way to link buttons to database -->
       <!--  <button @click="removePoem(item['.key'])">X</button> -->
@@ -85,7 +85,8 @@
   </div>
 
 </div> <!-- end app  -->
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.ui.min.js"></script>
 <script src="app.js"></script>
 <script src="creator.js"></script>
 </body>

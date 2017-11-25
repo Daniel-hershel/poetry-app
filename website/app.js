@@ -15,11 +15,7 @@ let firebaseApp = firebase.initializeApp(config);
 let db = firebaseApp.database();
 
 let databaseUrl = db.ref("poems");
-
-
-
-
-     
+    
 /* Initialize Vue app */
 
 let flag = true
@@ -161,16 +157,30 @@ var app = new Vue({
     showButtons: function(event){
       //how to make it so that only the button that was pressed's element shows the buttons
       let buttonGrabber = $(event.srcElement).siblings().filter('button')
+      let elemParent = $(event.srcElement).parent()
         // console.log($(this))
+        console.log($(this))
 
       if (flag){
-        // console.log(flag)
-        // console.log(this)
-        buttonGrabber.show()
+        //velocity to animate show and marginBottom and height grow to encompass elements
+        //grab parent elemnt and increase it's margin-bottom and height
+        elemParent.velocity({
+          p:{height: '+=1.8em', marginBottom: '+=1.8em', boxShadowX: '+=1em',boxShadowBlur: '+=1em'}
+        })
+        buttonGrabber.velocity({
+          p: 'transition.slideRightIn'
+        })
+        // buttonGrabber.show()
         flag = !flag
       }
       else {
-        buttonGrabber.hide()
+
+        // buttonGrabber.velocity({
+        //   p: 'transition.expandOut'
+        // })
+
+        elemParent.velocity('reverse')
+        buttonGrabber.velocity('reverse')
         flag = !flag
         // console.log('not flag')
       }
