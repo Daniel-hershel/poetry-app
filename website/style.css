@@ -22,7 +22,7 @@ body{
 	background-color: rgba(150, 164, 196, .8);
 	display: grid;
 	width: 95vw;
-	grid-template-columns: 55vw 30vw;
+	grid-template-columns: 30vw 30vw 30vw;
 	grid-template-rows: 40vh 50vh;
 	grid-gap: 1.5em;
 	margin: 4vh;
@@ -35,11 +35,11 @@ body{
 }
 
 #writerComponent{
-	grid-row: 2/ span 1;
+	grid-row: 1/ span 2;
 	grid-column: 1/span 1;
 	display: grid;
 	grid-template-columns: 90%;
-	grid-template-rows: 10vh 30vh 10vh;
+	grid-template-rows: 10vh 30vh 10vh 10vh;
 	grid-gap: 1.5em;
 }
 
@@ -64,6 +64,13 @@ body{
 
 }
 
+#reset{
+	grid-row: 4/ span 1;
+	grid-column: 1/1;
+ width: 100%;
+	
+}
+
 #titleHolder{
 	padding: 1em;
 	grid-column: 1/1;
@@ -78,18 +85,16 @@ body{
 }
 
 #stage {
-	grid-row: 1/span 1;
-	grid-column: 1/span 1;
-	background-color: #68738A;
+	grid-row: 1/span 2;
+	grid-column: 2/span 1;
+	background-color: rgba(104, 115, 138, .2);
 	width: 90%;
-
-
 }
 
 
 #archive{
 grid-row: 1/span 2;
-grid-column: 2/span 1;
+grid-column: 3/span 1;
 
 // display: grid
 
@@ -102,7 +107,7 @@ grid-column: 2/span 1;
 	z-index: 1;
 	height: 10vh;
 	width: 90%;
-	margin-left: 30%;
+	margin-left: 10%;
 	border: 0em solid  #4C5874;
 	box-shadow: 0em 0em 0em #BCC0C9;
 

@@ -16,10 +16,12 @@ let db = firebaseApp.database();
 
 let databaseUrl = db.ref("poems");
     
+
+// set boolean for two-way butons
+let flag = true;
+let everythingSelector = $("#stage");
+
 /* Initialize Vue app */
-
-let flag = true
-
 var app = new Vue({
   el: "#app",
   data() {
@@ -49,18 +51,14 @@ var app = new Vue({
       /* Set View */
 
       // Clear the stage 
-      let everythingSelector = $("#stage");
       everythingSelector.empty()
       // Clear any previous save revisions button
       let revisionSelector = $('#revisions')
       revisionSelector.empty()
 
       //remove the old blank page button--so maybe this should be a hide/show situation instead of remove and create?
-      $('#reset').remove()
+      // $('#reset').remove()
       
-
-      // $('.poemTitle').remove()
-
       // Hide the add poem button and title input
       $('#add').hide()
       $('#titleInput').hide()
@@ -89,30 +87,7 @@ var app = new Vue({
 
       
       // 3) Create the blank page button 
-      let resetButtonMaker = $('<button class = "option" id = "reset">Blank Page</button>')
-      let writerComponentSelector = $('#writerComponent')
-      // writerComponentSelector.append(resetButtonMaker)
-      $('#titleHolder').append(resetButtonMaker)
-      
-      $(resetButtonMaker).click(function(thing){
-        // 
-        
-        $('#add').show()
-        $('#titleInput').val('')
-        $('#titleInput').show()
-        
-        //revise button dissapears
-        
-        $('#revisionMaker').hide()
-        everythingSelector.empty()
-        //title element dissapears
-        // $('#poemTitle').hide()
-        //quill editor is reset to blank
-        quill.setText('\n')
-        quill.formatText("false")
-        $('#reset').remove()
-        
-      })
+
 
 
       // 4) Create the save revisions button
@@ -128,8 +103,30 @@ var app = new Vue({
         // Exercise - overwrite the db entry for this.stanzas and this.text
         databaseUrl.child(poem['.key']).child('text').set(newText);
         databaseUrl.child(poem['.key']).child('stanzas').set(newStanzas);
+
+        alert('Poem Updated')
+
       
       })
+
+    },
+
+    blankPage: function (){
+        
+        $('#add').show()
+        $('#titleInput').val('')
+        $('#titleInput').show()
+        
+        //revise button dissapears
+        $('#revisionMaker').hide()
+        everythingSelector.empty()
+        // set quill editor contents to be just an empty line
+        quill.setText('\n')
+
+        //is this still neccessary?
+        quill.formatText("false")
+        
+      // })
 
     },
 
@@ -148,6 +145,14 @@ var app = new Vue({
       console.log(quill.getContents().ops[0].insert)
       
       databaseUrl.push(newThing);
+       $('#titleInput').val('')
+       everythingSelector.empty()
+        // set quill editor contents to be just an empty line
+        quill.setText('\n')
+
+        //is this still neccessary?
+        quill.formatText("false")
+      // this.blankPage()
     },
 
     removePoem: function(poem) {
@@ -175,9 +180,6 @@ var app = new Vue({
       }
       else {
 
-        // buttonGrabber.velocity({
-        //   p: 'transition.expandOut'
-        // })
 
         elemParent.velocity('reverse')
         buttonGrabber.velocity('reverse')
@@ -201,8 +203,8 @@ var app = new Vue({
   }, // End methods
 
   created: function() {
-    console.log(this.poems)
-    console.log($('.archiveTitle').toArray())
+    console.log(this._data)
+    // console.log($('.archiveTitle').toArray())
 
           $('.show').hide()
       $('.delete').hide()
@@ -228,7 +230,14 @@ placeholder: 'poem...',
 });
 
 
-quill.on("editor-change", function(delta, oldDelta, source) {
+quill.on("text-change", function(delta, oldDelta, source) {
+  let deltaHolder = delta.ops[1]
+  // console.log(deltaHolder.insert)
+  console.log(delta)
+  console.log(source)
+  console.log(oldDelta)
+  // let text = quill.getText(0, 10);
+  // console.log(text)
   var poemBodySelector = $("#stage");
 
   poemBodySelector.empty();
@@ -237,12 +246,24 @@ quill.on("editor-change", function(delta, oldDelta, source) {
   let titleSelector = $('#poemTitle') 
   let poem = quill.root.innerHTML;
   console.log(poem)
-  // 
-  // titleSelector.empty();
 
+  // let poemHolder = $('<div class ="invisible"></div>')
+  // poemHolder.append(poem)
+  // poemHolder.html(poem)
+  // poemHolder.append(deltaHolder.insert)
   poemBodySelector.append(poem);
-  // titleSelector.append(poem);
-// editorCreator(message);
+
+  // $('p').velocity({
+  //   p: {opacity: 1},
+  //   o: {duration:1000}
+  // })
+  // console.log(poem)
+  //set class to something with opacity 0
+  // then animate opacity and like height
+  //if that works then try other animate to stage
+  // maybe like transformZ either/noth direction?
+
+
 });
 
 

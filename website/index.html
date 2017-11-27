@@ -42,7 +42,6 @@
 <div id = "app">
 
   <div id = "writerComponent" class = "section">
-  	
     <div id = "titleHolder">
     <input id = "titleInput" v-model="title" placeholder="poem title">
     </div>
@@ -51,6 +50,9 @@
 
       <button @click="addPoem(title)" id = "add" type="submit" class="option"> Add Poem </button>  
     </div>
+    
+  	<button @click="blankPage()" class = "option" id = "reset">Blank Page</button>
+
     <div id = "revisions"></div>
   </div>
 
