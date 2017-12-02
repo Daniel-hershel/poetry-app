@@ -19,7 +19,7 @@ body{
 }
 
 #app {
-	background-color: rgba(150, 164, 196, .8);
+	background-color: rgba(150, 164, 196, .1);
 	display: grid;
 	width: 95vw;
 	grid-template-columns: 30vw 30vw 30vw;
@@ -39,7 +39,7 @@ body{
 	grid-column: 1/span 1;
 	display: grid;
 	grid-template-columns: 90%;
-	grid-template-rows: 10vh 30vh 10vh 10vh;
+	grid-template-rows: 10vh 60vh 5vh 5vh;
 	grid-gap: 1.5em;
 }
 
@@ -51,6 +51,9 @@ body{
 	grid-column: 1/1;
 }
 
+h1{
+	font-size: 155%;
+}
 
 #add{
  width: 100%;
@@ -154,6 +157,10 @@ grid-column: 3/span 1;
 	font-size: 150%;
 	line-height: 1.2em;
 	text-transform: uppercase;
+}
+
+.ql-editor p::selection{
+	background: rgba( 40, 61,110,.3);
 }
 
 .option{

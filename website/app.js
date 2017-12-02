@@ -114,6 +114,9 @@ var app = new Vue({
     blankPage: function (){
         
         $('#add').show()
+
+      
+        // could replace with native vue app.title = ''
         $('#titleInput').val('')
         $('#titleInput').show()
         
@@ -131,6 +134,8 @@ var app = new Vue({
     },
 
     addPoem: function(title) {
+
+
       // consol.log()
       let delta = quill.root.innerHTML;
       let plainText = quill.getContents().ops[0].insert
@@ -142,10 +147,12 @@ var app = new Vue({
       text: plainText
       };
      
-      console.log(quill.getContents().ops[0].insert)
+      // console.log(quill.getContents().ops[0].insert)
       
       databaseUrl.push(newThing);
-       $('#titleInput').val('')
+      
+      app.title = ''
+
        everythingSelector.empty()
         // set quill editor contents to be just an empty line
         quill.setText('\n')
@@ -164,7 +171,7 @@ var app = new Vue({
       let buttonGrabber = $(event.srcElement).siblings().filter('button')
       let elemParent = $(event.srcElement).parent()
         // console.log($(this))
-        console.log($(this))
+        // console.log($(this))
 
       if (flag){
         //velocity to animate show and marginBottom and height grow to encompass elements
@@ -221,11 +228,15 @@ var app = new Vue({
 
 
 /*Quill stuff */
-
+// var toolbarOptions = [{ 'header': '3' }];
+var toolbarOptions = ['bold', 'italic', 'underline', 'strike', 'h1'];
 // does this need to be in the vue app?
 var quill = new Quill('#editor', {
 theme: 'bubble',
 placeholder: 'poem...',
+modules:{
+  toolbar: toolbarOptions
+}
 // debug: 'info'
 });
 
@@ -233,9 +244,9 @@ placeholder: 'poem...',
 quill.on("text-change", function(delta, oldDelta, source) {
   let deltaHolder = delta.ops[1]
   // console.log(deltaHolder.insert)
-  console.log(delta)
-  console.log(source)
-  console.log(oldDelta)
+  // console.log(delta)
+  // console.log(source)
+  // console.log(oldDelta)
   // let text = quill.getText(0, 10);
   // console.log(text)
   var poemBodySelector = $("#stage");
@@ -245,7 +256,7 @@ quill.on("text-change", function(delta, oldDelta, source) {
 // let message = quill.getContents();
   let titleSelector = $('#poemTitle') 
   let poem = quill.root.innerHTML;
-  console.log(poem)
+  // console.log(poem)
 
   // let poemHolder = $('<div class ="invisible"></div>')
   // poemHolder.append(poem)
