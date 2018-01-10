@@ -1,3 +1,5 @@
+/* Setup */
+
 /* Firebase Configuration*/
 var config = {
 apiKey: "AIzaSyDl-vzXnvQg3ntJWJhVXQlwOGt3RdMEbOs",
@@ -27,9 +29,14 @@ var app = new Vue({
   data() {
     return {
       title: "",
+      addPoemSeen: true,
+      titleSeen: true,
+      revisionSeen: true,
+      showOptionButtons:false,
       newPoem: {
         title: "",
         stanza: "",
+        richText: "",
         text: ""
       }
     };
@@ -40,196 +47,166 @@ var app = new Vue({
   },
 
   methods: {
+      showButtons: function(event){
+
+      // let buttonGrabber = $(event.srcElement).siblings().filter('button')
+      let elemParent = $(event.srcElement).parents('.poemHolder')
+
+        let buttonGrabber = $(event.srcElement).parents('.poemHolder').find('button')
+
+        console.log(buttonGrabber)
+
+        let flagGrabber = $(event.srcElement).parents('.poemHolder').find('.flag')
+        // let flagGrabber = $(event.srcElement).parents('.poemHolder').find('.iconFlag')
+
+        console.log(flagGrabber)
+      let elem = $(this)
+        // console.log($(this))
+      if (flag){
+        elemParent.velocity({
+          p:{height: '+=1.8em', marginBottom: '+=1.8em', boxShadowX: '+=1em',boxShadowBlur: '+=1em', backgroundColor:'rgba(0, 0, 0, 0.7)', opacity: .7 }
+        })
+
+         // app.showOptionButtons = true;
+        buttonGrabber.velocity({
+          p: 'transition.slideRightIn'
+        })
+
+        flagGrabber.velocity({
+          p: {rotateX: 180, rotateY: 45},
+          o: {}
+        })
+        flag = !flag
+      }
+      else {
+
+        elemParent.velocity('reverse')
+           // app.showOptionButtons= false;
+        // buttonGrabber.velocity('reverse')
+          buttonGrabber.velocity({
+          p: 'transition.slideRightOut'
+        })
+        flagGrabber.velocity('reverse')
+        flag = !flag
+      }
+    },
 
     showPoem: function(poem){
-
+      console.log(poem)
       /* Setup */
-
       // this.key -- connects scope to paricular instance in db
       let poemKey = poem['.key']
-
-      /* Set View */
-
       // Clear the stage 
       everythingSelector.empty()
       // Clear any previous save revisions button
       let revisionSelector = $('#revisions')
       revisionSelector.empty()
-
-      //remove the old blank page button--so maybe this should be a hide/show situation instead of remove and create?
-      // $('#reset').remove()
-      
       // Hide the add poem button and title input
-      $('#add').hide()
-      $('#titleInput').hide()
-
+      app.addPoemSeen = false
+      app.titleSeen = false
       /* Exercise */
+      // Set contents of quill editor to contents of selected. poem
+      if(poem.hasOwnProperty('richText')){
+        quill.setContents(poem.richText)
+      }
 
-      // 1) Set Stage: Create title and body for selected poem
+      else {
+        // This would strip stanzas of html tags but also lose line breaks
+        let strippedPoem = $(poem.stanzas).text()
+        quill.setText(poem.text + '\n')
+      }
 
-      let = poemTitle = $('<div id ="poemTitle"></div>')
-      poemTitle.append(poem.title)
+      // Create revision button for poem being staged
 
-      let poemBody = $('<div id = "poemBody"></div>')
-      poemBody.append(poem.text)
-
-      // Append title and body to stage
-
-      everythingSelector.append(poemTitle);
-      everythingSelector.append(poemBody);
-
-    
-
-      // 2) Set the text of the quill editor to be the text of selected poem
-  
-      quill.setText(poem.text+ '\n')
-      quill.formatText("false")
-
-      
-      // 3) Create the blank page button 
-
-
-
-      // 4) Create the save revisions button
       let buttonMaker = $('<button class = "option" id = "revisionMaker">Save Revisions</button>')
-      // Add button to the revisions element at the bottom of the writing component 
+      // Append button 
       revisionSelector.append(buttonMaker)
-
+      // Exercise Button
       $(buttonMaker).click(function(thing){
         // Setup
         let newStanzas = quill.root.innerHTML;
         let newText = quill.getContents().ops[0].insert
-
+        let newRichText = quill.getContents()
         // Exercise - overwrite the db entry for this.stanzas and this.text
         databaseUrl.child(poem['.key']).child('text').set(newText);
         databaseUrl.child(poem['.key']).child('stanzas').set(newStanzas);
-
+        databaseUrl.child(poem['.key']).child('richText').set(newRichText);
+        //Confirm
         alert('Poem Updated')
-
-      
       })
-
+    },
+    removePoem: function(poem, event) {
+      let visibleChecker = $(event.srcElement)
+      console.log(visibleChecker)
+      console.log('deactivated delete button danger')
+      //set an alert to make sure you want to save poem--
+      // alert/model with a conditional to delete entry
+      if(visibleChecker.is(":hidden")){
+        console.log('not visible')
+      }
+      else {
+        console.log('visible')
+      }
+      // databaseUrl.child(poem[".key"]).remove();
     },
 
     blankPage: function (){
-        
-        $('#add').show()
-
-      
-        // could replace with native vue app.title = ''
-        $('#titleInput').val('')
-        $('#titleInput').show()
-        
-        //revise button dissapears
+        /* reset editor */
+        app.addPoemSeen = true
+        // jQuery - ('#titleInput').val('')- could make velocity animation
+        app.title = ''
+        // jQuery - could make velocity animation - $('#titleInput').show()
+        app.titleSeen = true
+        //revise button dissapears-native vue not working i think because I creatd dynamically
+        // app.revisionSeen = false
         $('#revisionMaker').hide()
-        everythingSelector.empty()
         // set quill editor contents to be just an empty line
         quill.setText('\n')
 
-        //is this still neccessary?
-        quill.formatText("false")
-        
-      // })
-
     },
-
     addPoem: function(title) {
 
-
-      // consol.log()
+      // Setup
       let delta = quill.root.innerHTML;
-      let plainText = quill.getContents().ops[0].insert
-      // console.log(delta);
-      // console.log(quill.root.innerHTML)
+      let getRichText = quill.getContents()
+      console.log(getRichText)
+      // not working because of style test
+      // let plainText = quill.getContents().ops[0].insert
       let newThing = {
       title: title,
       stanzas: delta,
-      text: plainText
+      richText: getRichText
+      // text: plainText
       };
-     
-      // console.log(quill.getContents().ops[0].insert)
-      
+
+      // Exercise
       databaseUrl.push(newThing);
-      
+
+      // Verify
+      console.log(newThing)
+
+      // Teardown
       app.title = ''
-
-       everythingSelector.empty()
-        // set quill editor contents to be just an empty line
-        quill.setText('\n')
-
-        //is this still neccessary?
-        quill.formatText("false")
-      // this.blankPage()
+      // reset quill
+      quill.setText('\n')
     },
-
-    removePoem: function(poem) {
-      databaseUrl.child(poem[".key"]).remove();
-    },
-
-    showButtons: function(event){
-      //how to make it so that only the button that was pressed's element shows the buttons
-      let buttonGrabber = $(event.srcElement).siblings().filter('button')
-      let elemParent = $(event.srcElement).parent()
-        // console.log($(this))
-        // console.log($(this))
-
-      if (flag){
-        //velocity to animate show and marginBottom and height grow to encompass elements
-        //grab parent elemnt and increase it's margin-bottom and height
-        elemParent.velocity({
-          p:{height: '+=1.8em', marginBottom: '+=1.8em', boxShadowX: '+=1em',boxShadowBlur: '+=1em'}
-        })
-        buttonGrabber.velocity({
-          p: 'transition.slideRightIn'
-        })
-        // buttonGrabber.show()
-        flag = !flag
-      }
-      else {
-
-
-        elemParent.velocity('reverse')
-        buttonGrabber.velocity('reverse')
-        flag = !flag
-        // console.log('not flag')
-      }
-    },
-
-    mouseEnter: function(){
-      let thing = $(event.srcElement)
-      console.log(thing)
-
-      
-      console.log('in')
-    },
-
-    mouseLeave: function(){
-      console.log('out')
-    }
 
   }, // End methods
 
   created: function() {
     console.log(this._data)
-    // console.log($('.archiveTitle').toArray())
-
-          $('.show').hide()
-      $('.delete').hide()
-
-
-
-
-
-
+    // could/should I make these native vue seen true/flase
+    $('.show').hide()
+    $('.delete').hide()
+   
+   // console.log(Quill.imports);
   }
-
 }) // end app
 
 
-
 /*Quill stuff */
-// var toolbarOptions = [{ 'header': '3' }];
-var toolbarOptions = ['bold', 'italic', 'underline', 'strike', 'h1'];
+var toolbarOptions = 
+['bold', 'italic', 'underline', 'strike', { "header": '2' }, { 'color': [] }, { 'background': [] }];
 // does this need to be in the vue app?
 var quill = new Quill('#editor', {
 theme: 'bubble',
@@ -242,53 +219,19 @@ modules:{
 
 
 quill.on("text-change", function(delta, oldDelta, source) {
+  
   let deltaHolder = delta.ops[1]
-  // console.log(deltaHolder.insert)
-  // console.log(delta)
-  // console.log(source)
-  // console.log(oldDelta)
-  // let text = quill.getText(0, 10);
-  // console.log(text)
+  console.log(delta)
+  // set the stage to show the quill editor content on every text change
   var poemBodySelector = $("#stage");
-
   poemBodySelector.empty();
 
-// let message = quill.getContents();
-  let titleSelector = $('#poemTitle') 
   let poem = quill.root.innerHTML;
-  // console.log(poem)
-
-  // let poemHolder = $('<div class ="invisible"></div>')
-  // poemHolder.append(poem)
-  // poemHolder.html(poem)
-  // poemHolder.append(deltaHolder.insert)
   poemBodySelector.append(poem);
 
-  // $('p').velocity({
-  //   p: {opacity: 1},
-  //   o: {duration:1000}
-  // })
-  // console.log(poem)
-  //set class to something with opacity 0
-  // then animate opacity and like height
-  //if that works then try other animate to stage
-  // maybe like transformZ either/noth direction?
 
 
 });
-
-
-
-// $(document).ready(function() {
-
-// });
-// hide show and delete and show on title press--then add velocity animations
-
-
-// 
-// $( document ).ready(function() {
-
-// })
 
 
 /* quill function to get selected/highlighted text */

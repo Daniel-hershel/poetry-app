@@ -8,83 +8,86 @@
 
 <script src=" https://cdn.jsdelivr.net/npm/vue"></script>
 <link rel="stylesheet" href="https://unpkg.com/vue-directive-tooltip@latest/css/index.min.css">
-<!-- <script src="https://unpkg.com/vue@latest/dist/vue.js"></script> -->
+
 <script src="https://unpkg.com/popper.js"></script>
 <script src="https://unpkg.com/v-tooltip"></script>
+
 <!-- Firebase -->
 <script src="https://gstatic.com/firebasejs/4.0.0/firebase.js"></script>
 <!-- VueFire -->
 <script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
-
-
 <!-- Main Quill library -->
 <script src="//cdn.quilljs.com/1.3.3/quill.js"></script>
 <script src="//cdn.quilljs.com/1.3.3/quill.js"></script>
 
-
 <!-- Theme included stylesheets -->
 <link href="//cdn.quilljs.com/1.3.3/quill.bubble.css" rel="stylesheet">
-
-
 <link href="https://cdn.quilljs.com/1.3.3/quill.snow.css" rel="stylesheet">
+
 <link href="https://fonts.googleapis.com/css?family=Oswald:300,500,600,700" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
 <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+
+<!-- icons -->
+<script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
 <link rel = "stylesheet" href= "reset.css">
 <link rel = "stylesheet" href= "tooltipStyle.css">
 <link rel = "stylesheet" href= "style.css">
 
-
 </head>
 
 <body>
-
 <div id = "app">
 
-  <div id = "writerComponent" class = "section">
-    <div id = "titleHolder">
-    <input id = "titleInput" v-model="title" placeholder="poem title">
-    </div>
-    <div id = "editor"></div>
-    <div id = "addButton">
+<div id = "writerComponent" class = "section">
+<!-- <h1>Editor </h1> -->
+<div id = "titleHolder">
+<input id = "titleInput" v-if="addPoemSeen" v-model="title" placeholder="poem title">
+</div>
+<div id = "editor"></div>
+<div id = "addButton">
 
-      <button @click="addPoem(title)" id = "add" type="submit" class="option"> Add Poem </button>  
-    </div>
-    
-  	<button @click="blankPage()" class = "option" id = "reset">Blank Page</button>
+<button @click="addPoem(title)" id = "add" type="submit" class="option" v-if="addPoemSeen"> Add Poem </button>
+</div>
 
-    <div id = "revisions"></div>
-  </div>
+<button @click="blankPage()" class = "option" id = "reset">Blank Page</button>
 
-  <div id = "stage" class = "section"></div>
+<div id = "revisions"></div>
+</div>
 
-  <div id = "archive" class = "section">
+<div id = "stage" class = "section">
 
-  	<h1 id = "archiveSectionTitle" v-tooltip="{
-  content: 'click on any of the TITLES to reveal the options',
-  placement: 'left-start',
-  classes: ['info'],
-  targetClasses: ['it-has-a-tooltip'],
-  <!-- offset: 10, -->
-  delay: {
-    show: 50,
-    hide: 300,
-  },
+</div>
+
+<div id = "archive" class = "section">
+
+<h1 id = "archiveSectionTitle" v-tooltip="{
+content: 'click on the red boxes to reveal options',
+placement: 'left-start',
+classes: ['info'],
+targetClasses: ['it-has-a-tooltip'],
+offset: 20,
+delay: {
+show: 50,
+hide: 300,
+},
 }" > Poem Archive </h1>
-    <!-- <ul> -->
-      <div class = "poemHolder" v-for="poem in poems">
-      <div class = "archiveTitle"  v-tooltip.left-start="poem.stanzas">
-      	{{poem.title}}
-      </div>
+<div id = "archiveHolder">
 
-      <div @click="showButtons(event)" class = "flag"></div>
-      <button class = "show" @click="showPoem(poem)">Stage</button>
-      <button class = "delete" @click="removePoem(poem)">Delete</button>
-      <!--   inline way to link buttons to database -->
-      <!--  <button @click="removePoem(item['.key'])">X</button> -->
-      </div>
-    <!-- </ul> -->
-  </div>
+<div class = "poemHolder" v-for="poem in poems">
+<div class = "archiveTitle"  v-tooltip.left-start="poem.stanzas">
+{{poem.title}}
+</div>
+
+	<div class = "flag" @click="showButtons(event)" style="font-size:3em; color:#fcfcfc;" >
+  <!-- <i class="fas fa-briefcase"></i> -->
+  <i class="fab fa-accusoft fa-xs"></i>
+</div>
+<button class = "show" @click="showPoem(poem, event)">Stage</button>
+<button class = "delete" @click="removePoem(poem, event)">Delete</button>
+</div>
+
+</div>
 
 </div> <!-- end app  -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
