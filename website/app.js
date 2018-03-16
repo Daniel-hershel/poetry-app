@@ -42,8 +42,12 @@ var app = new Vue({
     };
   },
 
-  firebase: {
+  firebase: function () {
+
+    return {
     poems: databaseUrl
+
+  }
   },
 
   methods: {
@@ -147,7 +151,7 @@ var app = new Vue({
       else {
         console.log('visible')
       }
-      // databaseUrl.child(poem[".key"]).remove();
+      databaseUrl.child(poem[".key"]).remove();
     },
 
     blankPage: function (){
@@ -169,14 +173,15 @@ var app = new Vue({
       // Setup
       let delta = quill.root.innerHTML;
       let getRichText = quill.getContents()
+      let plainText = quill.getText()
       console.log(getRichText)
       // not working because of style test
       // let plainText = quill.getContents().ops[0].insert
       let newThing = {
       title: title,
       stanzas: delta,
-      richText: getRichText
-      // text: plainText
+      richText: getRichText,
+      text: plainText
       };
 
       // Exercise
@@ -191,29 +196,48 @@ var app = new Vue({
       quill.setText('\n')
     },
 
+
+  createGallery: function(){
+  // console.log(this.poems)
+
+
+    // for (var i=0;i< this.poems.length;i++){
+    //   console.log(this.poems.text[i])
+    // }
+    
+}
+
   }, // End methods
 
   created: function() {
-    console.log(this._data)
+    // console.log(this._data)
     // could/should I make these native vue seen true/flase
     $('.show').hide()
     $('.delete').hide()
+    // this.createGallery()
+  console.log(this.firebase)
+
+    // console.log(this.poems)
+
+    // first just create gallery here and then try to refactor out to its own function
+  
    
    // console.log(Quill.imports);
   }
 }) // end app
 
 
-/*Quill stuff */
+
+
 var toolbarOptions = 
 ['bold', 'italic', 'underline', 'strike', { "header": '2' }, { 'color': [] }, { 'background': [] }];
 // does this need to be in the vue app?
 var quill = new Quill('#editor', {
-theme: 'bubble',
+// theme: 'bubble',
 placeholder: 'poem...',
-modules:{
-  toolbar: toolbarOptions
-}
+// modules:{
+//   toolbar: toolbarOptions
+// }
 // debug: 'info'
 });
 

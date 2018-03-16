@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Poetry</title>
+
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src=" https://cdn.jsdelivr.net/npm/vue"></script>
+<link rel="stylesheet" href="https://unpkg.com/vue-directive-tooltip@latest/css/index.min.css">
+
+<script src="https://unpkg.com/popper.js"></script>
+<script src="https://unpkg.com/v-tooltip"></script>
+
+<!-- Firebase -->
+<script src="https://gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+<!-- VueFire -->
+<script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
+
+
+<link href="https://fonts.googleapis.com/css?family=Oswald:300,500,600,700" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+
+<!-- icons -->
+<script defer src="https://use.fontawesome.com/releases/v5.0.1/js/all.js"></script>
+<link rel = "stylesheet" href= "reset.css">
+<link rel = "stylesheet" href= "tooltipStyle.css">
+<link rel = "stylesheet" href= "style.css">
+
+
+<body>
+	<div id = "app">
+<h1> Poems </h1>
+<div class = "galleryHolder" v-for="poem in poems">
+<div class = "galleryTitle"  v-html= "poem.title" v-tooltip.left-start="poem.stanzas">
+<!-- {{poem.title}} -->
+</div>
+<div class = "galleryPoem" v-html= "poem.stanzas"></div>
+<!-- {{poem.stanzas}} -->
+</div> 
+</div>
+<!-- </div> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.ui.min.js"></script>
+<script src="app.js"></script>
+<!-- <script src="creator.js"></script> -->
+</body>
+
+
+</html>

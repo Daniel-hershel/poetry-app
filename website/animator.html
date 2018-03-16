@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Words Birth World</title>
+<link href="https://fonts.googleapis.com/css?family=Oswald:200,300,400" rel="stylesheet">
+<link rel="stylesheet" href="poem.css">
+<!-- <link rel="stylesheet" href="style.css"> -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src=" https://cdn.jsdelivr.net/npm/vue"></script>
+<link rel="stylesheet" href="https://unpkg.com/vue-directive-tooltip@latest/css/index.min.css">
+
+<script src="https://unpkg.com/popper.js"></script>
+<script src="https://unpkg.com/v-tooltip"></script>
+
+<!-- Firebase -->
+<script src="https://gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+<!-- VueFire -->
+<script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
+<!-- <script src="oridomi.min.js" type="text/javascript"></script> -->
+<!-- <script src="https://cdn.rawgit.com/jprichardson/string.js/master/lib/string.min.js"></script> -->
+
+
+</head>
+<body>
+<div id = "app">
+<div id = "holdEverything">
+
+</div> <!-- end holdEverything -->
+<div id = "controls"> 
+	<div class = "galleryHolder" v-for="poem in poems">
+<div class = "galleryTitle"  v-html= "poem.title" v-tooltip.left-start="poem.stanzas"><!-- {{poem.title}} --></div>
+<div class = "galleryPoem" v-html= "poem.stanzas"></div>
+<!-- {{poem.stanzas}} -->
+</div> 
+
+</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.dom.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.sound.min.js"></script> -->
+<!-- <script src="thesis.js"></script> -->
+<!-- <script src="jquery/jquery.fittext.js"></script> -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/velocity/1.4.3/velocity.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/velocity/1.4.3/velocity.ui.min.js"></script>
+
+
+<!-- <script src="jquery/jquery.blast.min.js"></script> -->
+<!-- <script src="jquery/jquery.lettering.js"></script> -->
+<!-- <script src="textualizer.min.js" type="text/javascript"></script> -->
+<!-- <script src="oridomi.min.js"></script> -->
+<!-- <script src="circletype.min.js"></script> -->
+<!-- <script src="plugins.js"></script> -->
+<!-- <script src="app.js"></script> -->
+
+<script src="poemStrokes.js"></script>
+<!-- <script src="jquery/jquery.slabtext.min.js"></script> -->
+<script src="prepPoem.js"></script>
+
+
+
+</body>
+</html>
+

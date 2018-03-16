@@ -12,14 +12,15 @@
    shade 4 = #102451 = rgb( 16, 36, 81) = rgba( 16, 36, 81,1) = rgb0(0.063,0.141,0.318)
 */
 body{
-	background-color: rgba(188, 192, 201, .7);
+	/*background-color: rgba(188, 192, 201, .7);*/
+	background-color: #fffff8;
 	font-size: 18px;
 	font-family: oswald;
 	color:  #102451;
 }
 
 #app {
-	background-color: rgba(150, 164, 196, .1);
+	/*background-color: rgba(150, 164, 196, .1);*/
 	display: grid;
 	width: 95vw;
 	grid-template-columns: 30vw 40vw 20vw;
@@ -53,6 +54,9 @@ body{
 
 p { 
 	font-weight:300;
+	font-size: 110%;
+	line-height: 1em;
+
 }
 h1{
 	font-size: 155%;
@@ -113,7 +117,7 @@ i{
 #stage {
 	grid-row: 1/span 2;
 	grid-column: 2/span 1;
-	background-color: rgba(104, 115, 138, .2);
+	background-color: rgba(104, 115, 138, .1);
 	width: 90%;
 }
 

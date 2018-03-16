@@ -1,0 +1,56 @@
+
+/*SETUP*/
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+body {
+  background-color:#fffff8;
+  /*background-color:#4F0010;*/
+font-size: 3.2vw;
+/*text-shadow: 2px 2px 2px  #1D2D44; */
+color:rgb(119, 20, 39);
+// color: #F0EBD8;
+// color: rgba(29, 45, 68, 1);
+  // transform: translate(20%, -20%);
+font-family: 'Oswald', sans-serif;
+  // font-weight: 400;
+// font-family: 'Open Sans', sans-serif;
+
+}
+
+
+#holdEverything{
+
+}
+
+#controls{
+	height: 20vh;
+	background-color: #F8FA9D;
+
+}
+p{
+	line-height: .5em;
+	font-size: 80%;
+	opacity: 0;
+	/*display: none;*/
+}
+
+#holder{
+	height: 55%;
+	width: 65%;
+	margin: auto;
+	margin-top: 38%;
+background-color: #D3F6FA;
+
+}
+
+.thing{
+display: inline-block;
+
+}

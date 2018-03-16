@@ -38,8 +38,11 @@
 
 <body>
 <div id = "app">
+	<a class = "option" href = "gallery.html" target = "_blank"> Gallery </a>
+	<a class = "option" href = "animator.html" target = "_blank"> Animation Center </a>
 
 <div id = "writerComponent" class = "section">
+
 <!-- <h1>Editor </h1> -->
 <div id = "titleHolder">
 <input id = "titleInput" v-if="addPoemSeen" v-model="title" placeholder="poem title">
@@ -51,6 +54,10 @@
 </div>
 
 <button @click="blankPage()" class = "option" id = "reset">Blank Page</button>
+
+
+<!-- <button @click="blankPage()" class = "option" id = "reset">Blank Page</button> -->
+
 
 <div id = "revisions"></div>
 </div>
@@ -93,6 +100,7 @@ hide: 300,
 <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.ui.min.js"></script>
 <script src="app.js"></script>
+<!-- <script src="quillStuff.js"></script> -->
 <script src="creator.js"></script>
 </body>
 
